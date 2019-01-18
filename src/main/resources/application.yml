@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1/lfy
+    username: root
+    password: 123456
+mybatis:
+  type-aliases-package: com.lfy.pojo
+server:
+  port: 8081

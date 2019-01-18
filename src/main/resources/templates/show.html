@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <script type="text/javascript" th:src="@{js/jquery-3.2.1.min.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+            alert("22");
+            $(".huanye").click(function () {
+                var num=$(this).html();
+                alert(num);
+                $.ajax({
+                    url:"/sel2",
+                    type:"post",
+                    data:"num="+num,
+                    success:function (res) {
+                        var arr=eval(res);
+                        for (var index in arr){
+                            var name=[index].name;
+                            var password=[index].password;
+                            var salt=[index].salt;
+                            $(".table").append("<tr><td>"+name+"</td><td>"+password+"</td><td>"+salt+"</td></tr>")
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    success
+    <table th:each="user:${list}" class="table">
+        <tr>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.salt}"></td>
+        </tr>
+    </table>
+<span th:each="num:${list1}">
+    <a class="huanye" href="#" th:text="${num}"></a>
+</span>
+
+</body>
+</html>
